@@ -1,7 +1,7 @@
-from typing import Dict, Any, List, Optional
+from typing import Any, Dict, List, NewType, Type, Union
 from fastapi import FastAPI
 
-from .feed_reader import get_rss_feed
+from .feed_reader import get_rss_feed, TemporaryFeed
 app = FastAPI()
 
 
@@ -11,7 +11,7 @@ async def root() -> Dict[str, str]:
 
 
 @app.get("/feed/{rss_source}")
-def get_feed(rss_source: str) -> Optional[List[Dict[str, Any]]]:
+def get_feed(rss_source: str) -> TemporaryFeed:
     if result := get_rss_feed(rss_source):
         return result
-    return None
+    return NotImplementedError
