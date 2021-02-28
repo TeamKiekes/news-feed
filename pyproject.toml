@@ -8,6 +8,7 @@ authors = ["JelsB <boulangier.jels@gmail.com>"]
 python = "^3.9"
 fastapi = "^0.63.0"
 uvicorn = {extras = ["standard"], version = "^0.13.4"}
+feedparser = "^6.0.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
