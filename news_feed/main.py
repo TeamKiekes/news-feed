@@ -1,7 +1,10 @@
-from typing import Any, Dict, List, NewType, Type, Union
+from typing import Dict
 from fastapi import FastAPI
+from fastapi.exceptions import HTTPException
 
 from .feed_reader import get_rss_feed, TemporaryFeed
+
+
 app = FastAPI()
 
 
@@ -11,7 +14,14 @@ async def root() -> Dict[str, str]:
 
 
 @app.get("/feed/{rss_source}")
-def get_feed(rss_source: str) -> TemporaryFeed:
-    if result := get_rss_feed(rss_source):
-        return result
-    return NotImplementedError
+def get_feed(rss_source: str, skip: int = 0, limit: int = 20) -> TemporaryFeed:
+    try:
+        if result := get_rss_feed(rss_source, skip, limit):
+            return result
+    except AssertionError as msg:
+        raise HTTPException(status_code=400, detail=f'{msg}')
+
+    except NotImplementedError as err:
+        raise HTTPException(status_code=400, detail=f'{rss_source} is not an available feed source')
+    else:
+        raise HTTPException(status_code=400, detail='Unknown request')
