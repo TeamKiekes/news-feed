@@ -1,7 +1,8 @@
-
+from __future__ import annotations
 from typing import Any, Dict, List, NewType, Type, Union
 import feedparser  # type: ignore
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
+from random import random
 
 VRT_RSS_URL = 'https://www.vrt.be/vrtnieuws/en.rss.articles.xml'
 VRT_RSS_FILE = './tests/resources/rss_sources/en.rss.articles.xml'  # Atom
@@ -10,7 +11,7 @@ BBC_RSS_URL = 'https://feeds.bbci.co.uk/news/world/rss.xml'
 BBC_RSS_FILE = './tests/resources/rss_sources/bbc.world.rss.xml'  # RSS
 BBC_MAX_ENTRIES = 23
 
-Feed = NewType('Feed', List[Dict[str, Any]])
+Feed = List[Dict[str, Any]]
 TemporaryFeed = Union[Type[NotImplementedError], Feed]
 
 
@@ -33,7 +34,7 @@ class NewsFeed:
     entries: Feed
 
     @classmethod
-    def from_rss_file(cls, config: FeedConfig, skip: int, limit: int, testing: bool = True):
+    def from_rss_file(cls, config: FeedConfig, skip: int, limit: int, testing: bool = True) -> NewsFeed:
 
         rss_location = config.url
         if testing:
@@ -54,6 +55,24 @@ class NewsFeed:
         return cls(entries)
 
 
+@dataclass
+class ReducedNewsArticle:
+    title: str
+    summary: str
+    link: str
+    published_parsed: List[int]
+    news_rating: int
+
+    @classmethod
+    def from_feed_article(cls, feed_article: Dict[str, Any]) -> ReducedNewsArticle:
+        title = feed_article.get('title', 'no title')
+        summary = feed_article.get('summary', 'no summary')
+        link = feed_article.get('link', 'no link')
+        published_parsed = feed_article.get('published_parsed', 'no published_parsed')
+        news_rating = int(random() * 100)
+        return cls(title=title, summary=summary, link=link, published_parsed=published_parsed, news_rating=news_rating)
+
+
 def get_rss_feed(source: str, skip: int, limit: int) -> TemporaryFeed:
     try:
         config = feed_configs[source]
@@ -61,4 +80,7 @@ def get_rss_feed(source: str, skip: int, limit: int) -> TemporaryFeed:
         raise NotImplementedError
 
     feed = NewsFeed.from_rss_file(config, skip, limit)
-    return feed
+    reduced_feed: List[ReducedNewsArticle] = [
+        ReducedNewsArticle.from_feed_article(article) for article in feed.entries]
+    reduced_feed_in_json: Feed = [asdict(article) for article in reduced_feed]
+    return reduced_feed_in_json
