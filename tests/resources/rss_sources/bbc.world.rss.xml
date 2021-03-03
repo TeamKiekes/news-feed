@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet title="XSL_formatting" type="text/xsl" href="/shared/bsp/xsl/rss/nolsol.xsl"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+    <channel>
+        <title><![CDATA[BBC News - World]]></title>
+        <description><![CDATA[BBC News - World]]></description>
+        <link>https://www.bbc.co.uk/news/</link>
+        <image>
+            <url>https://news.bbcimg.co.uk/nol/shared/img/bbc_news_120x60.gif</url>
+            <title>BBC News - World</title>
+            <link>https://www.bbc.co.uk/news/</link>
+        </image>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Wed, 03 Mar 2021 18:39:43 GMT</lastBuildDate>
+        <copyright><![CDATA[Copyright: (C) British Broadcasting Corporation, see http://news.bbc.co.uk/2/hi/help/rss/4498287.stm for terms and conditions of reuse.]]></copyright>
+        <language><![CDATA[en-gb]]></language>
+        <ttl>15</ttl>
+        <item>
+            <title><![CDATA[Myanmar sees deadliest day as 38 protesters killed]]></title>
+            <description><![CDATA[Security forces reportedly opened fire on large crowds in Mandalay and Monywa on Wednesday.]]></description>
+            <link>https://www.bbc.co.uk/news/world-asia-56265962</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-asia-56265962</guid>
+            <pubDate>Wed, 03 Mar 2021 17:54:23 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[ICC opens 'war crimes' investigation in West Bank and Gaza]]></title>
+            <description><![CDATA[Israel rejects the court's decision to probe alleged war crimes, while the Palestinians praise it.]]></description>
+            <link>https://www.bbc.co.uk/news/world-middle-east-56249927</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-middle-east-56249927</guid>
+            <pubDate>Wed, 03 Mar 2021 18:13:35 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Covid: Biden promises vaccines for all US adults by end of May]]></title>
+            <description><![CDATA[The US president also insists the "fight is not over", as some states move to relax Covid rules.]]></description>
+            <link>https://www.bbc.co.uk/news/world-us-canada-56262687</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-us-canada-56262687</guid>
+            <pubDate>Wed, 03 Mar 2021 13:32:49 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Germany to spy on far-right AfD party, reports say]]></title>
+            <description><![CDATA[The intelligence services have not publicly confirmed the move, which the AfD is fighting in court.]]></description>
+            <link>https://www.bbc.co.uk/news/world-europe-56250460</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-europe-56250460</guid>
+            <pubDate>Wed, 03 Mar 2021 15:19:42 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Man guilty of killing 10 in Toronto attack]]></title>
+            <description><![CDATA[A judge ruled against Alek Minassian, whose lawyers said he was not criminally responsible due to autism.]]></description>
+            <link>https://www.bbc.co.uk/news/uk-56269095</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/uk-56269095</guid>
+            <pubDate>Wed, 03 Mar 2021 17:37:48 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA['Vaccine, vaccine' - Dolly sings before Covid-19 jab]]></title>
+            <description><![CDATA["Vaccine, vaccine, vaccine, vaccine,” the country star sings before she receives a jab.]]></description>
+            <link>https://www.bbc.co.uk/news/world-us-canada-56262280</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-us-canada-56262280</guid>
+            <pubDate>Wed, 03 Mar 2021 05:20:54 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Covid: Police break up 'fake vaccine network' in China and South Africa]]></title>
+            <description><![CDATA[Thousands of doses of suspected counterfeit vaccine are seized by police in China and South Africa.]]></description>
+            <link>https://www.bbc.co.uk/news/world-africa-56270243</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-africa-56270243</guid>
+            <pubDate>Wed, 03 Mar 2021 18:34:51 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Greece earthquake shakes shop and collapses buildings]]></title>
+            <description><![CDATA[The 6.3 magnitude earthquake struck near the city of Larissa, but was felt across the country.]]></description>
+            <link>https://www.bbc.co.uk/news/world-europe-56272989</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-europe-56272989</guid>
+            <pubDate>Wed, 03 Mar 2021 17:48:19 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Covid-19: Backlash in Spain over princesses getting UAE vaccines]]></title>
+            <description><![CDATA[The sisters say they were offered the jab when visiting their father in the United Arab Emirates.]]></description>
+            <link>https://www.bbc.co.uk/news/world-europe-56270508</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-europe-56270508</guid>
+            <pubDate>Wed, 03 Mar 2021 17:14:32 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[South Korea's first transgender soldier found dead]]></title>
+            <description><![CDATA[Byun Hee-soo had been dismissed by the military for undergoing gender reassignment surgery.]]></description>
+            <link>https://www.bbc.co.uk/news/world-asia-56268409</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-asia-56268409</guid>
+            <pubDate>Wed, 03 Mar 2021 13:45:40 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Covid: Brazil's daily deaths reach all-time high]]></title>
+            <description><![CDATA[The daily toll reached 1,641 on Tuesday, Brazil's highest figure since the pandemic started.]]></description>
+            <link>https://www.bbc.co.uk/news/world-latin-america-56264425</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-latin-america-56264425</guid>
+            <pubDate>Wed, 03 Mar 2021 12:56:28 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[India is now only 'partly free' under Modi, says report]]></title>
+            <description><![CDATA[Rights group Freedom House notes a steady erosion of democracy in India, amid declining liberty globally.]]></description>
+            <link>https://www.bbc.co.uk/news/world-asia-india-56249596</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-asia-india-56249596</guid>
+            <pubDate>Wed, 03 Mar 2021 12:08:06 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Mars: Nasa's Perseverance rover sends stunning images]]></title>
+            <description><![CDATA[Amazing images as Nasa's Perseverance rover lands on Mars and seeks signs of past microbial life.]]></description>
+            <link>https://www.bbc.co.uk/news/in-pictures-56238018</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/in-pictures-56238018</guid>
+            <pubDate>Wed, 03 Mar 2021 00:17:09 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[DR Congo's Virunga National Park: The deadly job of protecting gorillas]]></title>
+            <description><![CDATA[In the past year, more than 20 rangers have been killed defending Africa's oldest national park.]]></description>
+            <link>https://www.bbc.co.uk/news/world-africa-55829330</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-africa-55829330</guid>
+            <pubDate>Wed, 03 Mar 2021 00:14:04 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Why many in Russia are reluctant to have Sputnik vaccine]]></title>
+            <description><![CDATA[Russia's Sputnik V vaccine against Covid is in worldwide demand, but many Russians remain unsure.]]></description>
+            <link>https://www.bbc.co.uk/news/world-europe-56250456</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-europe-56250456</guid>
+            <pubDate>Wed, 03 Mar 2021 00:24:31 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[The couples accused of destroying Japan's families]]></title>
+            <description><![CDATA[An archaic Japanese law requires married couples to adopt the same surname, but many are asking why.]]></description>
+            <link>https://www.bbc.co.uk/news/world-asia-55472446</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-asia-55472446</guid>
+            <pubDate>Wed, 03 Mar 2021 00:23:13 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[How US nuclear missiles found a base in Scotland]]></title>
+            <description><![CDATA[The controversial US nuclear submarines operated for more than 30 years and has a lasting legacy.]]></description>
+            <link>https://www.bbc.co.uk/news/uk-scotland-56124183</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/uk-scotland-56124183</guid>
+            <pubDate>Tue, 02 Mar 2021 22:44:47 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[How can we make washing machines last?]]></title>
+            <description><![CDATA[Sweden is trying to encourage consumers to repair household items like washing machines.]]></description>
+            <link>https://www.bbc.co.uk/news/business-56167505</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/business-56167505</guid>
+            <pubDate>Wed, 03 Mar 2021 00:07:36 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Myanmar anti-coup protesters flee from tear gas]]></title>
+            <description><![CDATA[Video footage shows anti-coup demonstrators running to avoid tear gas fired by police.]]></description>
+            <link>https://www.bbc.co.uk/news/world-asia-56268429</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-asia-56268429</guid>
+            <pubDate>Wed, 03 Mar 2021 13:02:35 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[World's first platypus refuge in Australia]]></title>
+            <description><![CDATA[Conservationists in Australia have announced exciting plans to open the world's first platypus refuge.]]></description>
+            <link>https://www.bbc.co.uk/news/world-australia-56267954</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-australia-56267954</guid>
+            <pubDate>Wed, 03 Mar 2021 13:22:13 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Mount Sinabung: Time-lapse shows Indonesia volcano's 5km-high ash cloud]]></title>
+            <description><![CDATA[The latest eruption from Mount Sinabung in North Sumatra sends ash up to 5km (3.1 miles) into the air.]]></description>
+            <link>https://www.bbc.co.uk/news/world-asia-56253470</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-asia-56253470</guid>
+            <pubDate>Tue, 02 Mar 2021 12:47:34 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Myanmar coup: Singapore PM Lee says situation 'tragic']]></title>
+            <description><![CDATA[Speaking to the BBC, Lee Hsien Loong condemns the use of violence against unarmed protesters.]]></description>
+            <link>https://www.bbc.co.uk/news/world-asia-56256803</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-asia-56256803</guid>
+            <pubDate>Tue, 02 Mar 2021 15:36:04 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Video shows 2020 Iranian missile attack on US forces at Iraqi base]]></title>
+            <description><![CDATA[Iran targeted an Iraqi base hosting US troops to avenge the assassination of Gen Qasem Soleimani.]]></description>
+            <link>https://www.bbc.co.uk/news/world-middle-east-56249923</link>
+            <guid isPermaLink="true">https://www.bbc.co.uk/news/world-middle-east-56249923</guid>
+            <pubDate>Tue, 02 Mar 2021 11:26:44 GMT</pubDate>
+        </item>
+    </channel>
+</rss>
+

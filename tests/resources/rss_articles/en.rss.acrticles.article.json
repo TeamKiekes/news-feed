@@ -1,0 +1,66 @@
+[
+    {
+        "title": "Protest in Brussels against China’s treatment of the Uyghurs",
+        "title_detail": {
+            "type": "text/plain",
+            "language": "en",
+            "base": "",
+            "value": "Protest in Brussels against China’s treatment of the Uyghurs"
+        },
+        "id": "https://vrtnws.be/p.bDeL1BaZl",
+        "guidislink": true,
+        "link": "https://vrtnws.be/p.bDeL1BaZl",
+        "published": "2021-02-28T11:32:03.000Z",
+        "published_parsed": [
+            2021,
+            2,
+            28,
+            11,
+            32,
+            3,
+            6,
+            59,
+            0
+        ],
+        "updated": "2021-02-28T11:32:03.000Z",
+        "updated_parsed": [
+            2021,
+            2,
+            28,
+            11,
+            32,
+            3,
+            6,
+            59,
+            0
+        ],
+        "summary": "Around 100 people gathered outside the Chinese Embassy in Brussels on Saturday to protest against China's treatment of the Uyghurs a Turkish-speaking people that live in the Xinjiang Uyghur region in north-western China.",
+        "summary_detail": {
+            "type": "text/plain",
+            "language": "en",
+            "base": "",
+            "value": "Around 100 people gathered outside the Chinese Embassy in Brussels on Saturday to protest against China's treatment of the Uyghurs a Turkish-speaking people that live in the Xinjiang Uyghur region in north-western China."
+        },
+        "vrtns_nstag": "Home News",
+        "vrtns_nslabeltag": "",
+        "links": [
+            {
+                "href": "https://www.vrt.be/vrtnws/en/2021/02/28/protest-in-brussels-against-chinas-treatment-of-the-uyghurs.rss.xml",
+                "rel": "self",
+                "title": "Protest in Brussels against China’s treatment of the Uyghurs ",
+                "type": "application/atom+xml"
+            },
+            {
+                "href": "https://vrtnws.be/p.bDeL1BaZl",
+                "rel": "alternate",
+                "title": "Protest in Brussels against China’s treatment of the Uyghurs ",
+                "type": "text/html"
+            },
+            {
+                "href": "https://images.vrt.be/vrtnws_share/2021/02/28/9cd78cc4-79b7-11eb-b07d-02b7b76bf47f.jpg",
+                "rel": "enclosure",
+                "type": "image/jpeg"
+            }
+        ]
+    }
+]

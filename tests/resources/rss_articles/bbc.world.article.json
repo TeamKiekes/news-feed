@@ -1,0 +1,40 @@
+[
+  {
+    "title": "Myanmar sees deadliest day as 38 protesters killed",
+    "title_detail": {
+      "type": "text/plain",
+      "language": null,
+      "base": "",
+      "value": "Myanmar sees deadliest day as 38 protesters killed"
+    },
+    "summary": "Security forces reportedly opened fire on large crowds in Mandalay and Monywa on Wednesday.",
+    "summary_detail": {
+      "type": "text/html",
+      "language": null,
+      "base": "",
+      "value": "Security forces reportedly opened fire on large crowds in Mandalay and Monywa on Wednesday."
+    },
+    "links": [
+      {
+        "rel": "alternate",
+        "type": "text/html",
+        "href": "https://www.bbc.co.uk/news/world-asia-56265962"
+      }
+    ],
+    "link": "https://www.bbc.co.uk/news/world-asia-56265962",
+    "id": "https://www.bbc.co.uk/news/world-asia-56265962",
+    "guidislink": false,
+    "published": "Wed, 03 Mar 2021 17:54:23 GMT",
+    "published_parsed": [
+      2021,
+      3,
+      3,
+      17,
+      54,
+      23,
+      2,
+      62,
+      0
+    ]
+  }
+]
