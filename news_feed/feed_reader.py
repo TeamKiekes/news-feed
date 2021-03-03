@@ -1,7 +1,7 @@
 
 from typing import Any, Dict, List, NewType, Type, Union
 import feedparser  # type: ignore
-
+from dataclasses import dataclass
 
 VRT_RSS_URL = 'https://www.vrt.be/vrtnieuws/en.rss.articles.xml'
 VRT_RSS_FILE = './tests/resources/rss_sources/en.rss.articles.xml'  # Atom
@@ -14,61 +14,51 @@ Feed = NewType('Feed', List[Dict[str, Any]])
 TemporaryFeed = Union[Type[NotImplementedError], Feed]
 
 
+@dataclass
+class FeedConfig:
+    name: str
+    url: str
+    rss_file: str
+    max_entries: int
+
+
+feed_configs = {
+    'vrt': FeedConfig('vrt', VRT_RSS_URL, VRT_RSS_FILE, VRT_MAX_ENTRIES),
+    'bbc': FeedConfig('vrt', BBC_RSS_URL, BBC_RSS_FILE, BBC_MAX_ENTRIES)
+}
+
+
+@dataclass
+class NewsFeed:
+    entries: Feed
+
+    @classmethod
+    def from_rss_file(cls, config: FeedConfig, skip: int, limit: int, testing: bool = True):
+
+        rss_location = config.url
+        if testing:
+            rss_location = config.rss_file
+
+        first = skip
+        last = skip + limit
+
+        assert first < config.max_entries, f"skip value has to lower than {config.max_entries}."
+        assert last < config.max_entries, f"skip + limit value has to lower than {config.max_entries}."
+        assert first < last, f"skip value to lower than skip + limit value."
+        assert first >= 0, f"skip value has to be positive."
+        assert last > 0, f"skip + limit value has greater than 0."
+
+        d = feedparser.parse(rss_location)
+
+        entries: Feed = d.entries[first: last]
+        return cls(entries)
+
+
 def get_rss_feed(source: str, skip: int, limit: int) -> TemporaryFeed:
-    if source == 'vrt':
-        return get_vrt_feed(skip, limit)
-    if source == 'bbc':
-        return get_bbc_feed(skip, limit)
-    raise NotImplementedError
+    try:
+        config = feed_configs[source]
+    except KeyError:
+        raise NotImplementedError
 
-
-def get_vrt_feed(skip: int, limit: int) -> Feed:
-    testing = True
-    rss_location = VRT_RSS_URL
-    if testing:
-        rss_location = VRT_RSS_FILE
-
-    first = skip
-    last = skip + limit
-
-    assert first < VRT_MAX_ENTRIES, f"skip value has to lower than {VRT_MAX_ENTRIES}."
-    assert last < VRT_MAX_ENTRIES, f"skip + limit value has to lower than {VRT_MAX_ENTRIES}."
-    assert first < last, f"skip value to lower than skip + limit value."
-    assert first >= 0, f"skip value has to be positive."
-    assert last > 0, f"skip + limit value has greater than 0."
-
-    d = feedparser.parse(rss_location)
-    # print(d.keys())
-    # print(d.feed.keys())
-    # ['language', 'title', 'title_detail', 'logo', 'id', 'guidislink', 'link', 'updated', 'updated_parsed', 'authors', 'author_detail', 'author', 'links']
-    entries: Feed = d.entries[first: last]
-    # print(entries[0].keys())
-    # ['title', 'title_detail', 'id', 'guidislink', 'link', 'published', 'published_parsed', 'updated', 'updated_parsed', 'summary', 'summary_detail', 'vrtns_nstag', 'vrtns_nslabeltag', 'links']
-
-    return entries
-
-
-def get_bbc_feed(skip: int, limit: int) -> Feed:
-    testing = True
-    rss_location = BBC_RSS_URL
-    if testing:
-        rss_location = BBC_RSS_FILE
-
-    first = skip
-    last = skip + limit
-
-    assert first < BBC_MAX_ENTRIES, f"skip value has to lower than {BBC_MAX_ENTRIES}."
-    assert last < BBC_MAX_ENTRIES, f"skip + limit value has to lower than {BBC_MAX_ENTRIES}."
-    assert first < last, f"skip value to lower than skip + limit value."
-    assert first >= 0, f"skip value has to be positive."
-    assert last > 0, f"skip + limit value has greater than 0."
-
-    d = feedparser.parse(rss_location)
-    # print(d.keys())
-    # print(d.feed.keys())
-    # ['language', 'title', 'title_detail', 'logo', 'id', 'guidislink', 'link', 'updated', 'updated_parsed', 'authors', 'author_detail', 'author', 'links']
-    entries: Feed = d.entries[first: last]
-    # print(entries[0].keys())
-    # ['title', 'title_detail', 'id', 'guidislink', 'link', 'published', 'published_parsed', 'updated', 'updated_parsed', 'summary', 'summary_detail', 'vrtns_nstag', 'vrtns_nslabeltag', 'links']
-
-    return entries
+    feed = NewsFeed.from_rss_file(config, skip, limit)
+    return feed
