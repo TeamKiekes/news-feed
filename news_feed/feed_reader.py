@@ -1,8 +1,11 @@
 from __future__ import annotations
-from typing import Any, Dict, List, NewType, Type, Union
+from typing import Any, Dict, List, Type, Union, Optional
 import feedparser  # type: ignore
 from dataclasses import asdict, dataclass
 from random import random
+from pathlib import Path
+import json
+import requests
 
 VRT_RSS_URL = 'https://www.vrt.be/vrtnieuws/en.rss.articles.xml'
 VRT_RSS_FILE = './tests/resources/rss_sources/en.rss.articles.xml'  # Atom
@@ -84,3 +87,39 @@ def get_rss_feed(source: str, skip: int, limit: int) -> TemporaryFeed:
         ReducedNewsArticle.from_feed_article(article) for article in feed.entries]
     reduced_feed_in_json: Feed = [asdict(article) for article in reduced_feed]
     return reduced_feed_in_json
+
+
+def fetch_rss_file(country_code: Optional[str] = None) -> None:
+    resources_dir = Path('../resources')
+    input_file = resources_dir / 'news_feed_list_countries.json'
+
+    with input_file.open('r') as f:
+        feed_list = json.load(f)
+
+    country_name = feed_list[country_code]['name']
+    country_sources = feed_list[country_code]['sources']
+    country_dir = resources_dir / 'RRS_files' / country_name
+    country_dir.mkdir(parents=True, exist_ok=True)
+
+    for source in country_sources:
+        source_name: str = source["name"]
+        print(f'Fetching RSS file of {source_name}')
+        rss_url = source['feedlink']
+        try:
+            response = requests.get(rss_url, allow_redirects=True)
+        except Exception as e:
+            print(f'Skipping {source_name} due to error \n{e}')
+            continue
+        response = requests.get(rss_url, allow_redirects=True)
+        file_name = f'{source_name.replace(" ", "_")}.xml'
+        with (country_dir / file_name).open('wb') as out:
+            out.write(response.content)
+
+
+def main() -> None:
+    test_country = 'BE'
+    fetch_rss_file(test_country)
+
+
+if __name__ == "__main__":
+    main()
