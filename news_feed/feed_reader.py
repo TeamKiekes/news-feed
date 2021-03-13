@@ -76,7 +76,15 @@ class ReducedNewsArticle:
         return cls(title=title, summary=summary, link=link, published_parsed=published_parsed, news_rating=news_rating)
 
 
-def get_rss_feed(source: str, skip: int, limit: int) -> TemporaryFeed:
+def get_rss_feed(source: str, *args: Any, **kwargs: Any) -> TemporaryFeed:
+    if source == 'belgium':
+        return get_rss_feed_v2(source, *args, **kwargs)
+    else:
+        return get_rss_feed_v1(source, *args, **kwargs)
+
+
+def get_rss_feed_v1(source: str, skip: int, limit: int) -> TemporaryFeed:
+
     try:
         config = feed_configs[source]
     except KeyError:
@@ -87,6 +95,10 @@ def get_rss_feed(source: str, skip: int, limit: int) -> TemporaryFeed:
         ReducedNewsArticle.from_feed_article(article) for article in feed.entries]
     reduced_feed_in_json: Feed = [asdict(article) for article in reduced_feed]
     return reduced_feed_in_json
+
+
+def get_rss_feed_v2(source: str, skip: int, limit: int) -> TemporaryFeed:
+    return [{'test': 'test'}]
 
 
 def fetch_rss_file(country_code: Optional[str] = None) -> None:
