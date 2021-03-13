@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import Any, Dict, List, Type, Union, Optional
 import feedparser  # type: ignore
 from dataclasses import asdict, dataclass
-from random import random
+import random
 from pathlib import Path
 import json
 import requests
@@ -13,6 +13,10 @@ VRT_MAX_ENTRIES = 50
 BBC_RSS_URL = 'https://feeds.bbci.co.uk/news/world/rss.xml'
 BBC_RSS_FILE = './tests/resources/rss_sources/bbc.world.rss.xml'  # RSS
 BBC_MAX_ENTRIES = 23
+
+RESOURCES_DIR = Path('news_feed/resources')
+RSS_FILES_DIR = RESOURCES_DIR / 'RSS_files'
+
 
 Feed = List[Dict[str, Any]]
 TemporaryFeed = Union[Type[NotImplementedError], Feed]
@@ -37,7 +41,7 @@ class NewsFeed:
     entries: Feed
 
     @classmethod
-    def from_rss_file(cls, config: FeedConfig, skip: int, limit: int, testing: bool = True) -> NewsFeed:
+    def from_rss_config(cls, config: FeedConfig, skip: int, limit: int, testing: bool = True) -> NewsFeed:
 
         rss_location = config.url
         if testing:
@@ -57,6 +61,16 @@ class NewsFeed:
         entries: Feed = d.entries[first: last]
         return cls(entries)
 
+    @classmethod
+    def from_rss_file(cls, file: Path) -> NewsFeed:
+        d = feedparser.parse(file)
+
+        entries: Feed = d.entries
+        return cls(entries)
+
+    # @staticmethod
+    # def get_feed_entries()
+
 
 @dataclass
 class ReducedNewsArticle:
@@ -72,45 +86,57 @@ class ReducedNewsArticle:
         summary = feed_article.get('summary', 'no summary')
         link = feed_article.get('link', 'no link')
         published_parsed = feed_article.get('published_parsed', 'no published_parsed')
-        news_rating = int(random() * 100)
+        news_rating = int(random.random() * 100)
         return cls(title=title, summary=summary, link=link, published_parsed=published_parsed, news_rating=news_rating)
 
 
 def get_rss_feed(source: str, *args: Any, **kwargs: Any) -> TemporaryFeed:
     if source == 'belgium':
-        return get_rss_feed_v2(source, *args, **kwargs)
+        return get_rss_feed_v2(source, **kwargs)
     else:
-        return get_rss_feed_v1(source, *args, **kwargs)
+        return get_rss_feed_v1(source, **kwargs)
 
 
-def get_rss_feed_v1(source: str, skip: int, limit: int) -> TemporaryFeed:
+def get_rss_feed_v1(source: str, skip: int, limit: int, **kwargs: Any) -> TemporaryFeed:
 
     try:
         config = feed_configs[source]
     except KeyError:
         raise NotImplementedError
 
-    feed = NewsFeed.from_rss_file(config, skip, limit)
+    feed = NewsFeed.from_rss_config(config, skip, limit)
     reduced_feed: List[ReducedNewsArticle] = [
         ReducedNewsArticle.from_feed_article(article) for article in feed.entries]
     reduced_feed_in_json: Feed = [asdict(article) for article in reduced_feed]
     return reduced_feed_in_json
 
 
-def get_rss_feed_v2(source: str, skip: int, limit: int) -> TemporaryFeed:
-    return [{'test': 'test'}]
+def get_rss_feed_v2(source: str, limit: int, **kwargs: Any) -> TemporaryFeed:
+
+    source_dir_name = RSS_FILES_DIR / source.capitalize()
+    source_files = source_dir_name.glob('*.xml')
+    # print(source_files)
+
+    reduced_feed: List[ReducedNewsArticle] = []
+    for file in source_files:
+        feed = NewsFeed.from_rss_file(file)
+        for article in feed.entries:
+            reduced_feed.append(ReducedNewsArticle.from_feed_article(article))
+
+    reduced_feed_in_json: Feed = [asdict(article)
+                                  for article in random.choices(reduced_feed, k=limit)]
+    return reduced_feed_in_json
 
 
 def fetch_rss_file(country_code: Optional[str] = None) -> None:
-    resources_dir = Path('../resources')
-    input_file = resources_dir / 'news_feed_list_countries.json'
+    input_file = RESOURCES_DIR / 'news_feed_list_countries.json'
 
     with input_file.open('r') as f:
         feed_list = json.load(f)
 
     country_name = feed_list[country_code]['name']
     country_sources = feed_list[country_code]['sources']
-    country_dir = resources_dir / 'RRS_files' / country_name
+    country_dir = RSS_FILES_DIR / country_name
     country_dir.mkdir(parents=True, exist_ok=True)
 
     for source in country_sources:

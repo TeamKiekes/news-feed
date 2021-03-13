@@ -2,7 +2,7 @@ from typing import Dict
 from fastapi import FastAPI
 from fastapi.exceptions import HTTPException
 
-from .feed_reader import get_rss_feed, TemporaryFeed
+from news_feed.feed_reader import get_rss_feed, TemporaryFeed
 
 
 app = FastAPI()
@@ -16,7 +16,7 @@ async def root() -> Dict[str, str]:
 @app.get("/feed/{rss_source}")
 def get_feed(rss_source: str, skip: int = 0, limit: int = 20) -> TemporaryFeed:
     try:
-        if result := get_rss_feed(rss_source, skip, limit):
+        if result := get_rss_feed(rss_source, skip=skip, limit=limit):
             return result
     except AssertionError as msg:
         raise HTTPException(status_code=400, detail=f'{msg}')
