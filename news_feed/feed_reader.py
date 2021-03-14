@@ -16,6 +16,7 @@ BBC_MAX_ENTRIES = 23
 
 RESOURCES_DIR = Path('news_feed/resources')
 RSS_FILES_DIR = RESOURCES_DIR / 'RSS_files'
+FEED_COUNTRIES = ['belgium', 'uk']
 
 
 Feed = List[Dict[str, Any]]
@@ -118,7 +119,7 @@ class ReducedNewsArticle:
 
 
 def get_rss_feed(source: str, *args: Any, **kwargs: Any) -> TemporaryFeed:
-    if source == 'belgium':
+    if source in FEED_COUNTRIES:
         return get_rss_feed_v2(source, **kwargs)
     else:
         return get_rss_feed_v1(source, **kwargs)
@@ -170,19 +171,24 @@ def fetch_rss_file(country_code: Optional[str] = None) -> None:
         source_name: str = source["name"]
         print(f'Fetching RSS file of {source_name}')
         rss_url = source['feedlink']
+        # TODO make async
+        # TODO remove 404, 403, ...
+        # TODO: Try https first
         try:
-            response = requests.get(rss_url, allow_redirects=True)
+            response = requests.get(rss_url, allow_redirects=True, timeout=2)
+        except TimeoutError as e:
+            print(f'Skipping {source_name} due to time out.')
+            continue
         except Exception as e:
             print(f'Skipping {source_name} due to error \n{e}')
             continue
-        response = requests.get(rss_url, allow_redirects=True)
         file_name = f'{source_name.replace(" ", "_")}.xml'
         with (country_dir / file_name).open('wb') as out:
             out.write(response.content)
 
 
 def main() -> None:
-    test_country = 'BE'
+    test_country = 'GB'
     fetch_rss_file(test_country)
 
 
