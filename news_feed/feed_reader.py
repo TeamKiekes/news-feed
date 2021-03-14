@@ -78,6 +78,7 @@ class ReducedNewsArticle:
     summary: str
     link: str
     published_parsed: List[int]
+    image_url: str
     news_rating: int
 
     @classmethod
@@ -86,8 +87,34 @@ class ReducedNewsArticle:
         summary = feed_article.get('summary', 'no summary')
         link = feed_article.get('link', 'no link')
         published_parsed = feed_article.get('published_parsed', 'no published_parsed')
+
+        image_url = cls._get_image_url(feed_article)
+
         news_rating = int(random.random() * 100)
-        return cls(title=title, summary=summary, link=link, published_parsed=published_parsed, news_rating=news_rating)
+        return cls(title=title, summary=summary, link=link,
+                   published_parsed=published_parsed, news_rating=news_rating,
+                   image_url=image_url)
+
+    @staticmethod
+    def _get_image_url(feed_article: Dict[str, Any]) -> str:
+        image_url = 'no image url'
+        try:
+            image_url = feed_article['media_thumbnail'][0]['url']
+            # print(f'Got media url {image_url}')
+        except KeyError as e:
+            # print(f'no media thumbnail for {title}')
+            try:
+                for link in feed_article['links']:
+                    if 'image' in link['type']:
+                        image_url = link['href']
+                        # print(f'Got link href url {image_url}')
+                        break
+            except Exception as e:
+                print('Something went wrong while getting the image url')
+                print(e)
+        else:
+            pass
+        return image_url
 
 
 def get_rss_feed(source: str, *args: Any, **kwargs: Any) -> TemporaryFeed:
