@@ -81,9 +81,3 @@ def cli():
     Call from root with `poetry run fetch -c <country_code>.
     """
     fire.Fire(fetch_rss_file)
-
-
-if __name__ == "__main__":
-    # r = requests.get('http://dhnamur.blogs.dhnet.be/index.rss')
-    r = requests.get('https://www.nieuwsblad.be/')
-    print(r.status_code)
