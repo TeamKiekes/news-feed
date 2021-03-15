@@ -10,6 +10,7 @@ fastapi = "^0.63.0"
 uvicorn = {extras = ["standard"], version = "^0.13.4"}
 feedparser = "^6.0.2"
 requests = "^2.25.1"
+fire = "^0.4.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
@@ -23,3 +24,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 start-api = "news_feed.api.main:start"
+fetch = "news_feed.feed_fetcher.fetcher:cli"

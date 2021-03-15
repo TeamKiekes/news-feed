@@ -1,5 +1,6 @@
 import requests
 import json
+import fire
 import feedparser  # type: ignore
 from typing import Optional
 import news_feed.constants as const
@@ -70,10 +71,9 @@ def is_valid_rss(content: str):
     return True
 
 
-def main() -> None:
-    test_country = 'GB'
-    fetch_rss_file(test_country)
-
-
-if __name__ == "__main__":
-    main()
+def cli():
+    """
+    Fetch country RSS files.
+    Call from root with `poetry run fetch -c <country_code>.
+    """
+    fire.Fire(fetch_rss_file)
