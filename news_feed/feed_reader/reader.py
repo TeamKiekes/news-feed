@@ -1,23 +1,12 @@
 from __future__ import annotations
-from typing import Any, Dict, List, Type, Union, Optional
+from typing import Any, Dict, List, Type, Union
 import feedparser  # type: ignore
 from dataclasses import asdict, dataclass
 import random
 from pathlib import Path
-import json
-import requests
 
-VRT_RSS_URL = 'https://www.vrt.be/vrtnieuws/en.rss.articles.xml'
-VRT_RSS_FILE = './tests/resources/rss_sources/en.rss.articles.xml'  # Atom
-VRT_MAX_ENTRIES = 50
-BBC_RSS_URL = 'https://feeds.bbci.co.uk/news/world/rss.xml'
-BBC_RSS_FILE = './tests/resources/rss_sources/bbc.world.rss.xml'  # RSS
-BBC_MAX_ENTRIES = 23
 
-RESOURCES_DIR = Path('news_feed/resources')
-RSS_FILES_DIR = RESOURCES_DIR / 'RSS_files'
-FEED_COUNTRIES = ['belgium', 'uk']
-
+import news_feed.constants as const
 
 Feed = List[Dict[str, Any]]
 TemporaryFeed = Union[Type[NotImplementedError], Feed]
@@ -32,8 +21,8 @@ class FeedConfig:
 
 
 feed_configs = {
-    'vrt': FeedConfig('vrt', VRT_RSS_URL, VRT_RSS_FILE, VRT_MAX_ENTRIES),
-    'bbc': FeedConfig('vrt', BBC_RSS_URL, BBC_RSS_FILE, BBC_MAX_ENTRIES)
+    'vrt': FeedConfig('vrt', const.VRT_RSS_URL, const.VRT_RSS_FILE, const.VRT_MAX_ENTRIES),
+    'bbc': FeedConfig('vrt', const.BBC_RSS_URL, const.BBC_RSS_FILE, const.BBC_MAX_ENTRIES)
 }
 
 
@@ -119,7 +108,7 @@ class ReducedNewsArticle:
 
 
 def get_rss_feed(source: str, *args: Any, **kwargs: Any) -> TemporaryFeed:
-    if source in FEED_COUNTRIES:
+    if source in const.FEED_COUNTRIES:
         return get_rss_feed_v2(source, **kwargs)
     else:
         return get_rss_feed_v1(source, **kwargs)
@@ -141,7 +130,7 @@ def get_rss_feed_v1(source: str, skip: int, limit: int, **kwargs: Any) -> Tempor
 
 def get_rss_feed_v2(source: str, limit: int, **kwargs: Any) -> TemporaryFeed:
 
-    source_dir_name = RSS_FILES_DIR / source.capitalize()
+    source_dir_name = const.RSS_FILES_DIR / source.capitalize()
     source_files = source_dir_name.glob('*.xml')
     # print(source_files)
 
@@ -154,43 +143,3 @@ def get_rss_feed_v2(source: str, limit: int, **kwargs: Any) -> TemporaryFeed:
     reduced_feed_in_json: Feed = [asdict(article)
                                   for article in random.choices(reduced_feed, k=limit)]
     return reduced_feed_in_json
-
-
-def fetch_rss_file(country_code: Optional[str] = None) -> None:
-    input_file = RESOURCES_DIR / 'news_feed_list_countries.json'
-
-    with input_file.open('r') as f:
-        feed_list = json.load(f)
-
-    country_name = feed_list[country_code]['name']
-    country_sources = feed_list[country_code]['sources']
-    country_dir = RSS_FILES_DIR / country_name
-    country_dir.mkdir(parents=True, exist_ok=True)
-
-    for source in country_sources:
-        source_name: str = source["name"]
-        print(f'Fetching RSS file of {source_name}')
-        rss_url = source['feedlink']
-        # TODO make async
-        # TODO remove 404, 403, ...
-        # TODO: Try https first
-        try:
-            response = requests.get(rss_url, allow_redirects=True, timeout=2)
-        except TimeoutError as e:
-            print(f'Skipping {source_name} due to time out.')
-            continue
-        except Exception as e:
-            print(f'Skipping {source_name} due to error \n{e}')
-            continue
-        file_name = f'{source_name.replace(" ", "_")}.xml'
-        with (country_dir / file_name).open('wb') as out:
-            out.write(response.content)
-
-
-def main() -> None:
-    test_country = 'GB'
-    fetch_rss_file(test_country)
-
-
-if __name__ == "__main__":
-    main()

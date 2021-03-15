@@ -1,8 +1,8 @@
 from typing import Dict
 from fastapi import FastAPI
 from fastapi.exceptions import HTTPException
-
-from news_feed.feed_reader import get_rss_feed, TemporaryFeed
+import uvicorn
+from news_feed.feed_reader.reader import get_rss_feed, TemporaryFeed
 
 
 app = FastAPI()
@@ -25,3 +25,8 @@ def get_feed(rss_source: str, skip: int = 0, limit: int = 20) -> TemporaryFeed:
         raise HTTPException(status_code=400, detail=f'{rss_source} is not an available feed source')
     else:
         raise HTTPException(status_code=400, detail='Unknown request')
+
+
+def start():
+    """Launched with `poetry run start` at root level"""
+    uvicorn.run("news_feed.api.main:app", host="0.0.0.0", port=8000, reload=True)

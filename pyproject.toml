@@ -20,3 +20,6 @@ autopep8 = "^1.5.5"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+start-api = "news_feed.api.main:start"

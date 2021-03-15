@@ -1,3 +1,7 @@
+
+#RSS files
+news_feed/resources/**/*.xml
+
 # VSCode workspace
 .vscode/*-workspace
 

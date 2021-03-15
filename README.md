@@ -1,7 +1,6 @@
 To start API server, run
 ```
-uvicorn news_feed.main:app --reload
-```
+poetry run start-api```
 
 # Development dependencies
 - Install [poetry](https://python-poetry.org/docs/#installation) (Python package manager)
