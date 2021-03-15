@@ -2,7 +2,7 @@ To start API server, run
 ```
 poetry run start-api
 ```
-To fetch RSS file from a country, run
+To fetch RSS files from a country, run
 ```
 poetry run fetch -c <country_code>
 ```

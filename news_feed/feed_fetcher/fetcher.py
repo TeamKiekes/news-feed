@@ -34,9 +34,8 @@ def fetch_rss_file(country_code: Optional[str] = None) -> None:
         source_name: str = source["name"]
         print(f'Fetching RSS file of {source_name}')
         rss_url = source['feedlink']
-        # TODO make async
-        # TODO remove 404, 403, ...
-        # TODO: Try https first
+        # TODO make async?
+        # TODO: Try https first?
         try:
             response = requests.get(rss_url, allow_redirects=True, timeout=2)
         except TimeoutError as e:
@@ -45,6 +44,11 @@ def fetch_rss_file(country_code: Optional[str] = None) -> None:
         except Exception as e:
             print(f'Skipping {source_name} due to request error \n{e}')
             continue
+
+        if not response.ok:
+            print(f'Skipping {source_name} due to bad response.')
+            continue
+
         file_name = f'{source_name.replace(" ", "_")}.xml'
 
         rss_file = response.content
@@ -53,8 +57,8 @@ def fetch_rss_file(country_code: Optional[str] = None) -> None:
             failed_sources['sources'].append(source)
             continue
 
-        # with (country_dir / file_name).open('wb') as out:
-        #     out.write(rss_file)
+        with (country_dir / file_name).open('wb') as out:
+            out.write(rss_file)
 
     if failed_sources['sources']:
         failed_country_dir = const.FAILED_RSS_FILES_DIR
@@ -77,3 +81,9 @@ def cli():
     Call from root with `poetry run fetch -c <country_code>.
     """
     fire.Fire(fetch_rss_file)
+
+
+if __name__ == "__main__":
+    # r = requests.get('http://dhnamur.blogs.dhnet.be/index.rss')
+    r = requests.get('https://www.nieuwsblad.be/')
+    print(r.status_code)
