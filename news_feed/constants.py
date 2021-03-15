@@ -9,5 +9,6 @@ BBC_MAX_ENTRIES = 23
 
 RESOURCES_DIR = Path('news_feed/resources')
 RSS_FILES_DIR = RESOURCES_DIR / 'RSS_files'
+FAILED_RSS_FILES_DIR = RESOURCES_DIR / 'failed_RSS_files'
 
 FEED_COUNTRIES = ['belgium', 'uk']
