@@ -21,7 +21,7 @@ def fetch_rss_file(country_code: Optional[str] = None) -> None:
     with input_file.open('r') as f:
         feed_list = json.load(f)
 
-    country_name = feed_list[country_code]['name']
+    country_name = feed_list[country_code]['name'].lower()
     country_sources = feed_list[country_code]['sources']
     country_dir = const.RSS_FILES_DIR / country_name
     country_dir.mkdir(parents=True, exist_ok=True)
