@@ -1,6 +1,11 @@
 To start API server, run
 ```
-poetry run start-api```
+poetry run start-api
+```
+To fetch RSS file from a country, run
+```
+poetry run fetch -c <country_code>
+```
 
 # Development dependencies
 - Install [poetry](https://python-poetry.org/docs/#installation) (Python package manager)
