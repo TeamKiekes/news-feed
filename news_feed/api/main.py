@@ -29,4 +29,4 @@ def get_feed(rss_source: str, skip: int = 0, limit: int = 20) -> TemporaryFeed:
 
 def start():
     """Launched with `poetry run start` at root level"""
-    uvicorn.run("news_feed.api.main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("news_feed.api.main:app", port=8000, reload=True)
