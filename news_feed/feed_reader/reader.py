@@ -130,7 +130,7 @@ def get_rss_feed_v1(source: str, skip: int, limit: int, **kwargs: Any) -> Tempor
 
 def get_rss_feed_v2(source: str, limit: int, **kwargs: Any) -> TemporaryFeed:
 
-    source_dir_name = const.RSS_FILES_DIR / source.capitalize()
+    source_dir_name = const.RSS_FILES_DIR / source.lower()
     source_files = source_dir_name.glob('*.xml')
     # print(source_files)
 
