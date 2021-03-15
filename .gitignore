@@ -1,6 +1,8 @@
 
 #RSS files
 news_feed/resources/**/*.xml
+news_feed/resources/**/*.json
+!news_feed/resources/news_feed_list_countries.json
 
 # VSCode workspace
 .vscode/*-workspace
