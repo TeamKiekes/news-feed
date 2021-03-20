@@ -78,6 +78,6 @@ def is_valid_rss(content: str):
 def cli():
     """
     Fetch country RSS files.
-    Call from root with `poetry run fetch -c <country_code>.
+    Call from root with `poetry run fetch -c <country_code>`.
     """
     fire.Fire(fetch_rss_file)

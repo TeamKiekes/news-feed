@@ -90,20 +90,23 @@ class ReducedNewsArticle:
         image_url = 'no image url'
         try:
             image_url = feed_article['media_thumbnail'][0]['url']
-            # print(f'Got media url {image_url}')
+            print(f'Got media url {image_url}')
         except KeyError as e:
-            # print(f'no media thumbnail for {title}')
+            print(f'no media thumbnail for {feed_article.title}')
             try:
                 for link in feed_article['links']:
                     if 'image' in link['type']:
                         image_url = link['href']
-                        # print(f'Got link href url {image_url}')
+                        print(f'Got link href url {image_url}')
                         break
+            # TODO: <media:content - url
+            # TODO: <images><image><link>
             except Exception as e:
                 print('Something went wrong while getting the image url')
                 print(e)
         else:
             pass
+        print(image_url)
         return image_url
 
 
