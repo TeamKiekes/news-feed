@@ -15,7 +15,7 @@ def get_valid_rss_version():
 VALID_RSS_VERSION = get_valid_rss_version()
 
 
-def fetch_rss_file(country_code: Optional[str] = None) -> None:
+def fetch_rss_file(country_code: str) -> None:
     input_file = const.RESOURCES_DIR / 'news_feed_list_countries.json'
 
     with input_file.open('r') as f:
